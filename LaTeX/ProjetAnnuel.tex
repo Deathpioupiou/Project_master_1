@@ -1,0 +1,302 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{natbib}
+\usepackage[frenchb]{babel}
+\usepackage{listings}
+\usepackage{babel}
+\author{'Sue Enzo'}
+\author{'Rebut Armand'}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{graphicx, wrapfig, subcaption, setspace, booktabs}
+\usepackage{fourier}
+\usepackage[protrusion=true, expansion=true]{microtype}
+\usepackage{hyperref}
+\usepackage[margin=2.5cm]{geometry}
+\renewcommand{\baselinestretch}{1.3}
+\usepackage{color}
+\begin{document}
+\begin{titlepage}
+	\parindent0pt
+	\fbox{%
+		\begin{minipage}{\dimexpr\linewidth-2\fboxsep-2\fboxrule}
+			\centering\Large\bfseries
+			\vskip1cm
+			Université de Caen\par
+			Master Informatique
+			\vskip1cm \kern0pt
+		\end{minipage}%
+	}%
+	\vskip0pt plus 0.2fil
+	\fbox{%
+		\begin{minipage}{\dimexpr\linewidth-2\fboxsep-2\fboxrule}
+			\centering\Large\bfseries
+			\vskip1cm
+			Projet tutoré:\par
+			Implémentation d'un système de réalité augmentée orienté image avec interaction multi-utilisateurs
+			
+			\vskip1cm \kern0pt
+		\end{minipage}%
+	}%
+	\vskip0.5cm
+	\textbf{\large{Enzo SUE \hfill 21606200\newline Armand REBUT\hfill 21607828}}
+	\newline
+	\textbf\large\center\Large
+	Enseignant référent: Loïs Vanhée
+	
+	\vskip0pt plus 1fil
+	\vskip0.25cm
+
+	\begin{center}		\includegraphics[width=0.5\textwidth]{logounicaen.png}
+	\end{center}
+	\leavevmode
+	\begin{minipage}{\dimexpr\linewidth/2-.4pt-.25cm\relax}
+	\end{minipage}%
+	\hskip.25cm \vrule width.8pt \hskip.25cm
+	\begin{minipage}{\dimexpr\linewidth/2-.4pt-.25cm\relax}
+	\end{minipage}%
+	\vskip0pt plus 1fil
+	\hfill\bfseries{Année universitaire 2019/2020}\hfill\null
+\end{titlepage}
+
+
+
+\newpage
+\tableofcontents
+\newpage
+
+
+
+
+
+
+
+
+
+\section{Remerciement}
+
+Nous aimerions présenter nos remerciements à notre enseignant référent Mr Loïs VANHEE.
+Nous voudrions également lui témoigner notre gratitude pour son soutien et le
+temps qu’il nous a accordé afin de mener notre travail à bon port. 
+\newpage
+
+\section{Introduction}
+Ce projet de réalité augmenté à capter notre attention pour plusieurs raisons : 
+\begin{itemize}
+    \item Il s'agit d'une technologie qui nous était inconnu, nous avions envie de la découvrir.
+    \item Le sujet était extrêmement libre, nous avions une grande liberté durant tout le projet
+\end{itemize}
+
+\medbreak
+La réalité augmentée est aujourd'hui utilisé dans plus en plus de domaine, que ce soit l'éducation, la médecine ou pour des applications plus ludiques. Ce développement suit la progression des technologies permettant de l'utiliser, presque tout les portables aujourd'hui disposent d'une puissance suffisante pour le faire marcher. Bien que possédants certains problèmes tels que ce soit la difficulté pour les applications mobiles de trouver des points pour créer l'espace ou les problèmes au niveau de la vie privée, cela ne réduit pas l'engouement engouement vers cette technologie. L'une des principale raison de cet essor est sa flexibilité, beaucoup d'entreprises utilisent aujourd'hui cette technologie pour mettre en valeur leurs produits ou permettre à l'acheteur de visualiser ce même produit dans un endroit tel que chez lui.
+\medbreak
+Beaucoup d'applications de ce type sont aujourd'hui mono-utilisateur car utilisées pour donner des informations à un simple utilisateur. Sa plus grande part d'utilisation sont les applications de type visualisation d'un produit dans un environnement. Il s'agit simplement d'une projection de l'objet dans la réalité reproduite avec la caméra de sa tablette ou son téléphone
+
+\medbreak
+
+Ce projet s'inscrit dans le cadre de notre formation de Master informatique à l'Université de Caen Normandie. Dans ce projet, nous nous sommes fixés comme objectif de réaliser une application utilisant la réalité augmentée et  étant multi-utilisateur. Nous voulons que ce projet sois déployable sur Android, quel soit ludique, que chaque personne puisse apporter sa pierre à l'édifice objectif.
+\medbreak
+Pour valider ce projet, nous avons choisis de créer une application de dessin en réalité augmentée où chaque personne pouvait dessiner avec les autres afin de réaliser une forme plus ou moins complexe et être noté sur celle-ci. Nous l'avons ensuite déployer sur plusieurs smartphones, nous pouvons suivre ce qu'il se passe via une base de données mise à jour en temps réel et via les écrans des smartphones participant à l'expérience où qu'ils soient.
+Cette application a une portée plus grande que juste ce dessin car suite à la coopération avec les membres d'un autre groupe travaillant sur la réalité augmentée au niveau localisation, l'aboutissement final du projet sera un jeu en équipe dans une grande zone (exemple: la ville de Caen,...), chaque équipe possédera plusieurs points à attaquer. Pour attaquer un point, chaque équipe devra réaliser un dessin plus ou moins complexe au lieu où se trouve le point en 3D. L'équipe possédant tout les points gagnerait la partie.
+\medbreak
+Ce projets impliqués plusieurs difficultés techniques: Chaque personne doit pouvoir jouer avec les autres peut-importe son emplacement. Le dessin en 3 dimension était une nouvelle technologie tout comme le langage et la mise en place d'un jeu en temps réel. 
+\medbreak
+Ce rapport vous présentera d'abord l'état de l'art, les logiciels et technologies existant déjà en rapport à la réalité augmentée. Suite à ça nous feront une comparaison des outils existant et expliquerons ce que nous avons choisis et pourquoi les avoir choisis. Enfin, nous allons parler de la création et l'implémentation des objectifs dans l'application.
+
+
+\newpage
+
+\section{Objectifs}
+Les objectifs de ce projet est de :
+\begin{itemize}
+\item réaliser une application concrète à l'aide du code de l'année précédente, c'est à dire une application utilisant la réalité augmentée et permettant des interactions multi-utilisateurs avec cette les objets de cette nouvelle réalité
+\item réaliser une journée de validation afin de valider notre projet
+\end{itemize}
+
+
+\section{Etat de l'art}
+\subsection{La réalité augmentée}
+Le principe de la réalité augmenté est de superposer des élément virtuel au monde réel. Le tout en temps réel avec pour but de donner l'illusion de l'intégration de l'élément dans le monde qu'il l'entoure. Aujourd'hui assez répandue, notamment avec son accessibilité devenu trivial par l'avancement des smartphones actuel permettant l'utilisation de cette technologie.
+Son fonctionnement est rendu possible par la détection de marqueur (dans une image ou un objet du monde réelle) qui permet le positionnement et le rajout des éléments virtuels. 
+Cette technologie est utilisée dans de nombreux domaine comme le jeu vidéo, l'éducation, le bâtiment ou encore la navigation avec pour but,d'apporter des information sur l'environnement réel autour de l'utilisateur.
+
+
+\subsection{Projet de l'année précédente}
+L'année précédente, des étudiants ont réalisé une application de réalité augmentée.\par
+Cette application utilisait une image possédant des marqueurs afin de reconnaitre l'environnement sur lequel la réalité augmentée devait avoir lieu. De là sortait un personnage avec lequel nous pouvions réaliser plusieurs actions plus ou moins simples à l'aide de boutons.
+\newline
+De plus, il possédait une interaction multi-utilisateur, en effet, 2 personnes scannant la carte pouvait accéder à la même salle depuis laquelle nous pouvions voir chaque personnage contrôlait par chaque joueur.
+	\begin{center}		\includegraphics[width=0.9\textwidth]{projetAnneeDerniere.png}
+	\end{center}
+\par
+Ce projet était très intéressant mais cependant, plusieurs attributs empêcher l'intégration de ce projet à l'intérieur du notre : tout d'abord, notre projet devait pouvoir se jouer sur des grandes zones sans préparation préalable excepté la création des équipes. Ainsi, il nous était impossible d'aller déposer des marqueurs sur toute la ville avant de lancer notre jeu. Nous devions donc repenser à comment réaliser la reconnaissance du terrain.
+
+\subsection{Exemples de projets de réalité augmentée}
+	\includegraphics[width=0.9\textwidth]{justLine.png}
+	\begin{center}
+	\href{https://play.google.com/store/apps/details?id=com.arexperiments.justaline&hl=fr}{Just a Line}
+	\end{center}
+
+\section{Outils existant}
+\par
+Il existe plusieurs outils permettant de réaliser des applications de réalité augmentée. Nous avons commencé par nous intéresser à l’outil utilisé pour le projet de l’année dernière.
+ Ce dernier est \textbf{Vuforia}, un plug in de Unity 3d qui fonctionne par reconnaissance de marqueur (photo Qr code), d’objet 3d et de forme. Ensuite, il y a \textbf{ARCore}, un framework de google
+  reprenant sensiblement les fonctionnalité d'\textbf{ARkit} framework d’Apple. Ce dernier est capable de détecter l'environnement sans l’ajout de marqueur ou de préparation. Nous avons aussi
+ pris connaissance donc de \textbf{ARKit} et \textbf{Easy AR} pour l choix de notre outil.
+
+\subsection{décision technique:}
+\par
+Nous avions, dans un premier temps, choisit d’utiliser Vuforia comme outil notamment pour sa simplicité et la possibilité de gérer les marqueur à distance. Mais au vu du choix de notre application, ARcore été un choix plus judicieux pour sa reconnaissance de l'environnement sans marqueur prédéfinis. Nous n’avons pas voulu utiliser ARkit car il est seulement disponible sur IOS or nous voulions développer un projet sur Android, bien plus répandu et installé sur les téléphones portables auxquels nous avions accès. Nous avons donc réalisé notre projet avec le Framework ARcore.
+
+\par
+Voici quelques critères que nous avons utilisé lors de notre recherche, organisé dans un tableau de comparaison:
+
+%\begin{tabular}
+%	\hline
+%	 & Vuforia & ARcore & ARkit & EasyAR \tabularnewline
+%	 \hline
+%	 Licence & gratuite, option professionnel & gratuite & gratuite & gratuite, option professionnel \tabularnewline
+%	 \hline
+%	 Plateform & android, IOS, Windows phone &  android, IOS & IOS & android, IOS, Windows phone  \tabularnewline
+%	 \hline
+%	 reconnaissance d'objet 3d & oui &  oui & oui & oui  \tabularnewline
+%	 \hline
+%	 reconnaissance par marqueur distant & oui &  non & non & oui  \tabularnewline
+%	 \hline
+%	 détection de l'environement & non &  oui & oui & non  \tabularnewline	
+%\end{tabular}
+
+\section{Outils utilisés}
+	\subsection{ARcore}
+		\begin{itemize}
+			\item Acquisition de l'image
+		\end{itemize}
+		\par
+		ARcore étant un framework utilisé pour des applications Android, ce dernier demande l’autorisation et utilise la caméra de l’appareil pour la reconnaissance de l'environnement.
+
+		\begin{itemize}
+			\item Ajout d'objet virtuel
+		\end{itemize}
+		\par
+		Arcore permet la visualisation d’objet 3d virtuellement , dans un environnement réelle. Arcore peut prend en compte les surface dans l’ajout de ces objets
+
+		\begin{itemize}
+			\item Détection de l'environement
+		\end{itemize}
+		\par
+		ARcore va être capable de reconnaître et se positionner dans un environnement réelle. Pour cela Arcore va utiliser les capteur du téléphone comme l'accéléromètre pour détecter les mouvement ainsi que la caméra. Puis après une phase de calcule va créer des marqueur pour se repérer.
+		\par
+		Mais cette fonctionnalité est à double tranchant , car cela réduit les appareil compatible au vu de la puissance nécessaire.
+
+		\begin{itemize}
+			\item Reconnaissance des surfaces
+		\end{itemize}
+		\par
+		Avec la detection de son environement , ARcore et aussi capable détecter les surface. Il peut ainsi repérer les surface horizontale et verticale. Cela permet de pouvoir placer des objet virtuel sur des table , sol et mur réelle.
+	\subsection{FireBase}
+	\par
+	FireBase est un service destiné au développement mobile et Web. Firebase est un outil regroupant plusieur api et fonctionnalité intuitive facilitant de développement et la gestion le tout pouvant desservir une multitude d’utilisateur en même temps.Dans ces multitude de service nous pouvons trouver:
+	\begin{itemize}
+		\item Firebase authentification
+	\end{itemize}
+	\par
+	Ce service permet de faciliter l’authentification des utilisateur se connectant à nos application. Cela permet de disposer d’un système d’authentification sécurisée et facile à mettre en oeuvre tout en pouvant profiter de l'authentification par compte google,twitter ou encore facebook.
+	\begin{itemize}
+		\item cloud Messaging
+	\end{itemize}
+	\par
+	Permet la réception et l’envoie de notification . Il est possible d’envoyer des message ou notification au utilisateur de l’application via ce service
+
+	\begin{itemize}
+		\item Realtime Database
+	\end{itemize}
+	\par
+	Base de donnée nosql permettant le stockage et l'accès à l’information en temps réelle. Les utilisateur peuvent recevoir et mettre à jour les donnée avec une synchronisation en temps réelle. L’orque que le terminale passe en mode hors ligne , firebase utilise le cache pour pouvoir envoyer et mettre à jour lorsque l'appareil est de nouveau connecté .
+\section{Réalisation technique}
+\par
+La réalisation du projet c’est déroulée en deux étape. Dans un premier temps nous avons mis l’aspect multi utilisateur pour ce concentrer sur l’aspect réalitée. Puis dans un second temps nous avons travailler sur la partie multijoueur de l'application.
+	\subsection{Première partie}
+	\par
+	Pour commencer notre projet nous nous somme donc concentrer sur la partie réalitée augmentée. Et pour cela nous avons pris en main le FrameWork et fait des recherche sur des exemple de projet. Nous aons trouver un projet open source DrawAR (https://github.com/googlecreativelab/ar-drawing-java/blob/master/app/src/main/java/com/googlecreativelab/drawar/DrawAR.java)  Ce projet et une application de dessin en 3d. Nous nous somme donc servi de ce projet comme base pour le notre, et avons décortiqué le programme pour le comprendre et se l'approprier. 
+	\begin{itemize}
+		\item Camera
+	\end{itemize}
+	\par
+	Pour un projet utilisant ARcore nous n’utilisons pas directement la caméra , nous faison appelle à l’objet Camera d’arcore. Cette objet pourra permettre d'acquérir les information nécessaire pour la position de point dans l'espace.
+
+	\begin{itemize}
+		\item Vector3f
+	\end{itemize}
+	\par
+	Les point sont représentés par des Vector3f. Ce vecteur et donc composé de 3 donnée :x,y et z. C’est grâce à ces point que le dessin sera réalisé
+
+	\begin{itemize}
+		\item Les trait
+	\end{itemize}
+	\par
+	Les différent trait qui seront réalisés seront donc constitués d’une multitude de point. Le dessin dans sa globalité sera donc sauvegarder dans une liste de liste de Vecteur.
+
+	\begin{itemize}
+		\item LineShaderRenderer
+	\end{itemize}
+	
+	\par
+	Sera utiliser à chaque mouvement ou ajout de point. Cette classe permet de générer et afficher le dessin réaliser un l’ajoutant par dessus le flux de la caméra.
+	\par
+	Avant de commencer notre projet nous avons dû préciser dans le fichier build de notre application que nous voulions qu’il télécharge les fichier nécessaire à l’utilisation d’arcore. 
+	\newline
+	\includegraphics[width=0.9\textwidth]{Capture7.png}
+	\newline
+	\par
+	Et nous avons spécifier les autorisation nécessaire pour la caméra et pour la connection internet qui nous servira par la suite.
+	\newline
+	\includegraphics[width=0.9\textwidth]{Capture6.png}
+	\newline
+	\subsection{Deuxième partie}
+	\par
+	Après avoir réalisée la base de notre application de dessin nous avons commencé a réalisé la partie multi utilisateur. Cette partie sera réalisé en utilisant l’outils Firebase et le service RealTime Database.
+
+	\par
+	Nous avons tout d’abord créer un nouveau projet sur la page de FireBase afin de pouvoir ajouter le projet à notre application. A ce niveau il est nécessaire de renseigner le nom du package.
+	\newline
+	\includegraphics[width=0.9\textwidth]{Capture5.png}
+	\newline
+	\par
+	Une fois cela réalisé Firebase donne un fichier json à mettre dans nottre application qui servira à se connecter au service. Il est nécessaire ici aussi de modifier le build du projet pour installer le service Firebase
+	\newline
+	\includegraphics[width=0.9\textwidth]{Capture4.png}
+	\newline
+	\par
+	Une fois que tout est configurer et installer nous pouvons échanger avec notre base de donnée pour sauvegarder ,récupére ou modifier nos donnée.
+	Pour la structure nous avions choissit dans un premier temps une structure assez simple:
+	\newline
+	\includegraphics[width=0.5\textwidth]{Capture2.png}
+	\newline
+	\par
+	Nous avions donc un variable nous rappelant la derniere piece créer pour incrémenter cette dernière puis la liste des groupe où chaque groupe représenté en faite la liste de vecteur.
+	\par
+	Mais ceci nous a posée problème car lorsqu'un joueur perdez la connexion ou que deux joueur écrire en même temps une des sauvegarde se trouve écrasée par la dernière envoyer. Nous avons donc changer la structure pour attribuer à chaque nouvelle utilisation du groupe , une liste personnelle que seul lui pouvait modifier sans toucher au autres.
+	\newline
+	La nouvelle structure est donc :
+	\newline
+	\includegraphics[width=0.5\textwidth]{Capture.png}
+	\newline
+\section{Validation et Application}
+\par
+Nous avons dans l’ensemble réalisée les fonctionnalité voulu dans notre application. Mais nous avons des fonctionnalité qui sont partiellement développé. L’application permet donc de créer un groupe d’utilisateur qui peuvent interagir sur l’environnement en dessinant.
+\newline
+\includegraphics[width=1\textwidth]{dessin1.png}
+\newline
+\par
+Lorsque l’utilisateur ouvre l’application deux choix luis son possible, Il peut créer un nouveau dessins (1) et un code lui sera attribué (4). Ou si une session est déjà lancé et qu’il dispose du code il peut le rentrer (2) et se connecter au dessin (3).
+Une fois cette étape passée l’utilisateur peut commencer à dessiner (10) et verra les dessin des autre joueur s’ajouter au sien et vice versa .
+Plusieur boutons lui sont disponible , il peut effacer le dernier trait réaliser (5) ,modifier la position du dessin en générale (6), modifier la couleur des traits (7) valider le dessin (8) et afficher le modèle.
+\newline
+\includegraphics[width=0.9\textwidth]{Capture3.png}
+\newline
+\includegraphics[width=1\textwidth]{dessin2.png}
+\end{document}
