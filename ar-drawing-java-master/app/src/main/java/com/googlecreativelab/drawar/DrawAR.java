@@ -117,7 +117,7 @@ public class DrawAR extends AppCompatActivity implements GLSurfaceView.Renderer,
 
     private float mLineWidthMax = 0.6f;
     private float mDistanceScale = 0.0f;
-    private float mLineSmoothing = 0.1f;
+    private float mLineSmoothing = 0.2f;
 
     private float[] mLastFramePosition;
 
